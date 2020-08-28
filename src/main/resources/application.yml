@@ -1,0 +1,36 @@
+spring:
+  #mysql数据库相关配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mybatis:
+    type-aliases-package: com.example.demo.domain
+
+  pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
+
+  redis:
+    #Redis数据库索引（默认为0）
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    #springboot 2.x版本中默认Redis客户端是用 lettuce实现的。
+    #Jedis在实现上是直接连接的redis server，如果在多线程环境下是非线程安全的，这个时候只有使用连接池，为每个Jedis实例增加物理连接
+    #Lettuce的连接是基于Netty的，连接实例（StatefulRedisConnection）可以在多个线程间并发访问，应为StatefulRedisConnection是线程安全的，所以一个连接实例（StatefulRedisConnection）就可以满足多线程环境下的并发访问，当然这个也是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
