@@ -34,3 +34,14 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
+
+  data:
+    elasticsearch:
+
+      cluster-nodes: 127.0.0.1:9300
+      repositories:
+        enabled: true #开启 Elasticsearch 仓库。(默认值:true。)
+        properties:
+          path:
+            logs: ./elasticsearch/log
+            data: ./elasticsearch/data
